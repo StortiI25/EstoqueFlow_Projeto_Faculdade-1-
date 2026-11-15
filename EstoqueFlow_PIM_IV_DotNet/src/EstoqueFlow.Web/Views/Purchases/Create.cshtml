@@ -1,0 +1,12 @@
+@model EstoqueFlow.Web.Models.PurchaseOrder
+@{ ViewData["Title"] = "Novo pedido de compra"; var suppliers = (IEnumerable<EstoqueFlow.Web.Models.Supplier>)ViewBag.Suppliers; var products = (IEnumerable<EstoqueFlow.Web.Models.Product>)ViewBag.Products; }
+<div class="page-intro"><div><h1>Novo pedido de compra</h1><p>Selecione o fornecedor, o produto e a quantidade solicitada.</p></div></div>
+<div class="panel-card" style="max-width:850px">
+@if(!suppliers.Any() || !products.Any()){<div class="alert alert-warning">Para criar um pedido, cadastre pelo menos um fornecedor e um produto. <a asp-controller="Suppliers" asp-action="Create">Cadastrar fornecedor</a> · <a asp-controller="Products" asp-action="Create">Cadastrar produto</a></div>}
+<form asp-action="Create" method="post"><div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div><div class="row g-3">
+<div class="col-md-6"><label class="form-label" asp-for="SupplierId">Fornecedor</label><select asp-for="SupplierId" class="form-select"><option value="">Selecione</option>@foreach(var x in suppliers){<option value="@x.Id">@x.Name</option>}</select><span asp-validation-for="SupplierId" class="text-danger"></span></div>
+<div class="col-md-6"><label class="form-label" asp-for="ProductId">Produto</label><select asp-for="ProductId" class="form-select"><option value="">Selecione</option>@foreach(var x in products){<option value="@x.Id">@x.Name</option>}</select><span asp-validation-for="ProductId" class="text-danger"></span></div>
+<div class="col-md-4"><label class="form-label" asp-for="Quantity">Quantidade</label><input asp-for="Quantity" class="form-control" type="number" min="1"/></div>
+<div class="col-md-4"><label class="form-label" asp-for="UnitPrice">Preço unitário</label><input asp-for="UnitPrice" class="form-control" type="number" min="0.01" step="0.01"/></div>
+<div class="col-md-12"><label class="form-label" asp-for="Notes">Observação</label><input asp-for="Notes" class="form-control" placeholder="Informações adicionais"/></div></div>
+<hr class="my-4"/><button class="btn btn-primary" disabled="@(!suppliers.Any() || !products.Any())">Criar pedido</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a></form></div>

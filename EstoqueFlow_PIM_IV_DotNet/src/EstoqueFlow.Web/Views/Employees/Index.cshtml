@@ -1,0 +1,24 @@
+@model IEnumerable<EstoqueFlow.Web.Models.AppUser>
+@{ ViewData["Title"] = "Funcionários"; }
+<div class="page-intro">
+    <div><h1>Funcionários e usuários</h1><p>Cadastre contas e controle os perfis de acesso ao EstoqueFlow.</p></div>
+    <a asp-action="Create" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Novo funcionário</a>
+</div>
+<div class="panel-card">
+    <div class="panel-title"><h2>Usuários cadastrados</h2><small>@Model.Count() registro(s)</small></div>
+    <div class="table-responsive"><table class="table align-middle">
+        <thead><tr><th>Nome</th><th>E-mail</th><th>Telefone</th><th>Perfil</th><th>Status</th><th>Ação</th></tr></thead>
+        <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td><strong>@user.FullName</strong></td><td>@user.Email</td><td>@(string.IsNullOrWhiteSpace(user.Phone) ? "—" : user.Phone)</td>
+                <td><span class="role-tag">@(user.Role == "Administrador" ? "Administrador" : "Funcionário")</span></td>
+                <td><span class="@(user.IsActive ? "status-ok" : "status-low")">@(user.IsActive ? "Ativo" : "Inativo")</span></td>
+                <td><a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i> Editar</a></td>
+            </tr>
+        }
+        </tbody>
+    </table></div>
+</div>
+<div class="alert alert-info mt-3 small">Contas inativas não conseguem entrar no sistema. O registro é preservado para manter o histórico administrativo.</div>

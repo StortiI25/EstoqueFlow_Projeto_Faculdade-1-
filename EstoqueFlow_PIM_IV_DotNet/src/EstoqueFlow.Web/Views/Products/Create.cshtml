@@ -1,0 +1,38 @@
+@model EstoqueFlow.Web.Models.Product
+@{ ViewData["Title"] = "Novo produto"; }
+<div class="page-intro">
+    <div><h1>Novo produto</h1><p>Informe os dados básicos para incluir um item no catálogo.</p></div>
+</div>
+<div class="panel-card" style="max-width:780px">
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <div class="row g-3">
+            <div class="col-md-8">
+                <label asp-for="Name" class="form-label">Descrição do produto</label>
+                <input asp-for="Name" class="form-control" placeholder="Ex.: Teclado USB" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Category" class="form-label">Categoria</label>
+                <input asp-for="Category" class="form-control" placeholder="Ex.: Informática" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Price" class="form-label">Preço unitário</label>
+                <input asp-for="Price" class="form-control" type="number" min="0" step="0.01" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Quantity" class="form-label">Quantidade inicial</label>
+                <input asp-for="Quantity" class="form-control" type="number" min="0" />
+            </div>
+            <div class="col-md-4">
+                <label asp-for="MinimumStock" class="form-label">Estoque mínimo</label>
+                <input asp-for="MinimumStock" class="form-control" type="number" min="0" />
+            </div>
+        </div>
+        <hr class="my-4" style="border-color:#e8edf3" />
+        <div class="d-flex gap-2">
+            <button class="btn btn-primary px-4" type="submit"><i class="bi bi-check-lg me-1"></i>Salvar produto</button>
+            <a class="btn btn-outline-secondary" asp-action="Index">Cancelar</a>
+        </div>
+    </form>
+</div>

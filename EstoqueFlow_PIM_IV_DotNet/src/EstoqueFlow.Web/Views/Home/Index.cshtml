@@ -1,0 +1,123 @@
+@{
+    ViewData["Title"] = "Painel inicial";
+}
+<div class="page-intro">
+    <div>
+        <h1>Visão geral da operação</h1>
+        <p>Acompanhe os principais indicadores e acesse rapidamente as rotinas do EstoqueFlow.</p>
+    </div>
+    <span class="badge text-bg-light border text-secondary fw-normal p-2">Visão administrativa</span>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-6 col-xl-3">
+        <div class="metric-card">
+            <div class="metric-top"><span>Produtos cadastrados</span><span class="metric-icon"><i class="bi bi-box-seam"></i></span></div>
+            <div class="metric-value">@ViewBag.ProductCount</div>
+            <div class="metric-foot">Itens registrados no sistema</div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="metric-card">
+            <div class="metric-top"><span>Estoque baixo</span><span class="metric-icon" style="background:#fff4df;color:#b47a16"><i class="bi bi-exclamation-triangle"></i></span></div>
+            <div class="metric-value">@ViewBag.LowStockCount</div>
+            <div class="metric-foot">Produtos no mínimo ou abaixo dele</div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="metric-card">
+            <div class="metric-top"><span>Movimentações</span><span class="metric-icon" style="background:#e8f7f1;color:#16815d"><i class="bi bi-arrow-left-right"></i></span></div>
+            <div class="metric-value">@ViewBag.MovementCount</div>
+            <div class="metric-foot">Registros de entrada e saída</div>
+        </div>
+    </div>
+    <div class="col-6 col-xl-3">
+        <div class="metric-card">
+            <div class="metric-top"><span>Módulos disponíveis</span><span class="metric-icon" style="background:#f1edff;color:#7656b5"><i class="bi bi-grid"></i></span></div>
+            <div class="metric-value">7</div>
+            <div class="metric-foot">Painel e seis áreas operacionais</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-lg-7">
+        <div class="panel-card h-100">
+            <div class="panel-title">
+                <h2><i class="bi bi-lightning-charge me-2 text-primary"></i>Acesso rápido</h2>
+                <small>Rotinas principais</small>
+            </div>
+            <div class="row g-2">
+                <div class="col-md-6">
+                    <a class="quick-action" asp-controller="Products" asp-action="Create">
+                        <i class="bi bi-plus-square"></i><span><strong>Cadastrar produto</strong><small>Incluir um novo item no catálogo</small></span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a class="quick-action" asp-controller="Products" asp-action="Index">
+                        <i class="bi bi-card-list"></i><span><strong>Consultar produtos</strong><small>Pesquisar e editar cadastros</small></span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a class="quick-action" asp-controller="Stock" asp-action="Index">
+                        <i class="bi bi-box-arrow-in-down"></i><span><strong>Movimentar estoque</strong><small>Registrar entrada ou saída</small></span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a class="quick-action" asp-controller="Suppliers" asp-action="Index">
+                        <i class="bi bi-truck"></i><span><strong>Fornecedores</strong><small>Consultar parceiros cadastrados</small></span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a class="quick-action" asp-controller="Customers" asp-action="Index">
+                        <i class="bi bi-people"></i><span><strong>Clientes</strong><small>Consultar cadastro de clientes</small></span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a class="quick-action" asp-controller="Purchases" asp-action="Index">
+                        <i class="bi bi-cart3"></i><span><strong>Pedidos de compra</strong><small>Acompanhar pedidos e recebimentos</small></span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a class="quick-action" asp-controller="Reports" asp-action="Index">
+                        <i class="bi bi-bar-chart"></i><span><strong>Relatórios</strong><small>Consultar indicadores do estoque</small></span>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a class="quick-action" asp-controller="Sales" asp-action="Index">
+                        <i class="bi bi-receipt"></i><span><strong>Pedidos de venda</strong><small>@ViewBag.PendingSales pedido(s) pendente(s)</small></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="panel-card h-100">
+            <div class="panel-title"><h2><i class="bi bi-diagram-3 me-2 text-primary"></i>Estrutura do ERP</h2></div>
+            <div class="d-flex align-items-start gap-3 mb-3">
+                <span class="metric-icon"><i class="bi bi-box"></i></span>
+                <div><strong class="d-block" style="font-size:11px">Estoque</strong><small class="text-secondary">Cadastro de produtos e controle de saldo.</small></div>
+            </div>
+            <div class="d-flex align-items-start gap-3 mb-3">
+                <span class="metric-icon"><i class="bi bi-arrow-left-right"></i></span>
+                <div><strong class="d-block" style="font-size:11px">Movimentações</strong><small class="text-secondary">Registro e rastreabilidade de entradas e saídas.</small></div>
+            </div>
+            <div class="d-flex align-items-start gap-3">
+                <span class="metric-icon"><i class="bi bi-cart3"></i></span>
+                <div><strong class="d-block" style="font-size:11px">Suprimentos e vendas</strong><small class="text-secondary">@ViewBag.SupplierCount fornecedor(es) • @ViewBag.PendingPurchases compra(s) pendente(s) • @ViewBag.PendingSales venda(s) pendente(s).</small></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel-card">
+    <div class="panel-title">
+        <h2><i class="bi bi-info-circle me-2 text-primary"></i>Informações do ambiente</h2>
+        <small>Projeto acadêmico</small>
+    </div>
+    <div class="row g-3">
+        <div class="col-md-4"><small class="text-secondary d-block">Aplicação Web</small><strong style="font-size:12px">ASP.NET Core MVC</strong></div>
+        <div class="col-md-4"><small class="text-secondary d-block">Banco de dados</small><strong style="font-size:12px">SQLite + Entity Framework Core</strong></div>
+        <div class="col-md-4"><small class="text-secondary d-block">Aplicativo móvel</small><strong style="font-size:12px">.NET MAUI (cliente da API)</strong></div>
+    </div>
+</div>

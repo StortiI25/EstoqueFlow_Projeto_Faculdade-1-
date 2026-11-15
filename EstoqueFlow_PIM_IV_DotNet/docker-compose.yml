@@ -1,0 +1,13 @@
+﻿services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: estoqueflow-web
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data/estoqueflow.db:/app/estoqueflow.db
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+    restart: unless-stopped

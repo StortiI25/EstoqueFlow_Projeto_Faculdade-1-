@@ -1,0 +1,13 @@
+@model EstoqueFlow.Web.Models.SalesOrder
+@{ ViewData["Title"] = "Novo pedido de venda"; var customers = (IEnumerable<EstoqueFlow.Web.Models.Customer>)ViewBag.Customers; var products = (IEnumerable<EstoqueFlow.Web.Models.Product>)ViewBag.Products; }
+<div class="page-intro"><div><h1>Novo pedido de venda</h1><p>Informe o cliente, o produto e a quantidade solicitada.</p></div></div>
+<div class="panel-card" style="max-width:850px">
+@if(!customers.Any() || !products.Any()){<div class="alert alert-warning">Para criar um pedido, cadastre pelo menos um cliente e um produto. <a asp-controller="Customers" asp-action="Create">Cadastrar cliente</a> · <a asp-controller="Products" asp-action="Create">Cadastrar produto</a></div>}
+<form asp-action="Create" method="post"><div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div><div class="row g-3">
+<div class="col-md-6"><label class="form-label" asp-for="CustomerId">Cliente</label><select asp-for="CustomerId" class="form-select"><option value="">Selecione</option>@foreach(var x in customers){<option value="@x.Id">@x.Name</option>}</select><span asp-validation-for="CustomerId" class="text-danger"></span></div>
+<div class="col-md-6"><label class="form-label" asp-for="ProductId">Produto</label><select asp-for="ProductId" class="form-select"><option value="">Selecione</option>@foreach(var x in products){<option value="@x.Id">@x.Name — saldo @x.Quantity</option>}</select><span asp-validation-for="ProductId" class="text-danger"></span></div>
+<div class="col-md-4"><label class="form-label" asp-for="Quantity">Quantidade</label><input asp-for="Quantity" class="form-control" type="number" min="1"/></div>
+<div class="col-md-4"><label class="form-label" asp-for="UnitPrice">Preço unitário de venda</label><input asp-for="UnitPrice" class="form-control" type="number" min="0.01" step="0.01"/></div>
+<div class="col-md-12"><label class="form-label" asp-for="Notes">Observação</label><input asp-for="Notes" class="form-control" placeholder="Informações adicionais"/></div></div>
+<div class="alert alert-info mt-3 mb-0">O estoque só será reduzido quando o pedido for confirmado na listagem de vendas.</div>
+<hr class="my-4"/><button class="btn btn-primary" disabled="@(!customers.Any() || !products.Any())">Criar pedido</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a></form></div>

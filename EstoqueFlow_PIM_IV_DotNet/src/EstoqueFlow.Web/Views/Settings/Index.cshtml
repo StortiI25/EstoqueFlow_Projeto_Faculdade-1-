@@ -1,0 +1,19 @@
+@model EstoqueFlow.Web.Models.SystemSettings
+@{ ViewData["Title"] = "Configurações"; }
+<div class="page-intro"><div><h1>Configurações do sistema</h1><p>Defina os dados institucionais exibidos na administração do EstoqueFlow.</p></div></div>
+<div class="panel-card" style="max-width:850px">
+    <div class="panel-title"><h2><i class="bi bi-building me-2"></i>Dados da empresa</h2><small>Área exclusiva do administrador</small></div>
+    <form asp-action="Index" method="post">
+            <input asp-for="Id" type="hidden" />
+        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+        <div class="row g-3">
+            <div class="col-md-8"><label asp-for="CompanyName" class="form-label">Nome da empresa</label><input asp-for="CompanyName" class="form-control" /><span asp-validation-for="CompanyName" class="text-danger small"></span></div>
+            <div class="col-md-4"><label asp-for="Document" class="form-label">CNPJ</label><input asp-for="Document" class="form-control" placeholder="00.000.000/0000-00" /><span asp-validation-for="Document" class="text-danger small"></span></div>
+            <div class="col-md-6"><label asp-for="Email" class="form-label">E-mail</label><input asp-for="Email" class="form-control" /><span asp-validation-for="Email" class="text-danger small"></span></div>
+            <div class="col-md-6"><label asp-for="Phone" class="form-label">Telefone</label><input asp-for="Phone" class="form-control" /><span asp-validation-for="Phone" class="text-danger small"></span></div>
+            <div class="col-12"><label asp-for="Address" class="form-label">Endereço</label><input asp-for="Address" class="form-control" /><span asp-validation-for="Address" class="text-danger small"></span></div>
+        </div>
+        <div class="alert alert-info small mt-3">As configurações desta versão guardam os dados cadastrais da empresa. Parâmetros operacionais adicionais podem ser adicionados em uma próxima etapa.</div>
+        <button class="btn btn-primary" type="submit"><i class="bi bi-check-lg me-1"></i>Salvar configurações</button>
+    </form>
+</div>

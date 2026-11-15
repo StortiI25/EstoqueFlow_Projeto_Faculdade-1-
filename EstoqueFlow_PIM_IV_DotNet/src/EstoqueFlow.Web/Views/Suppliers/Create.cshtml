@@ -1,0 +1,11 @@
+@model EstoqueFlow.Web.Models.Supplier
+@{ var edit = Model.Id > 0; ViewData["Title"] = edit ? "Editar fornecedor" : "Novo fornecedor"; }
+<div class="page-intro"><div><h1>@ViewData["Title"]</h1><p>Preencha os dados de identificação e contato.</p></div></div>
+<div class="panel-card" style="max-width:800px"><form asp-action="@(edit ? "Edit" : "Create")" method="post">@if(edit){<input asp-for="Id" type="hidden"/>}
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div><div class="row g-3">
+<div class="col-md-8"><label asp-for="Name" class="form-label">Razão social / Nome</label><input asp-for="Name" class="form-control"/><span asp-validation-for="Name" class="text-danger"></span></div>
+<div class="col-md-4"><label asp-for="Document" class="form-label">CNPJ / CPF</label><input asp-for="Document" class="form-control"/></div>
+<div class="col-md-6"><label asp-for="Email" class="form-label">E-mail</label><input asp-for="Email" class="form-control"/></div>
+<div class="col-md-6"><label asp-for="Phone" class="form-label">Telefone</label><input asp-for="Phone" class="form-control"/></div>
+<div class="col-12"><label asp-for="Address" class="form-label">Endereço</label><input asp-for="Address" class="form-control"/></div></div>
+<hr class="my-4"/><button class="btn btn-primary">Salvar</button> <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a></form></div>

@@ -1,0 +1,19 @@
+@model EstoqueFlow.Web.Models.ViewModels.EmployeeCreateViewModel
+@{ ViewData["Title"] = "Novo funcionário"; }
+<div class="page-intro"><div><h1>Cadastrar funcionário</h1><p>Crie uma conta de acesso para a equipe.</p></div></div>
+<div class="panel-card" style="max-width:760px">
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+    <div class="row g-3">
+        <div class="col-md-6"><label asp-for="FullName" class="form-label"></label><input asp-for="FullName" class="form-control" /><span asp-validation-for="FullName" class="text-danger small"></span></div>
+        <div class="col-md-6"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control" /><span asp-validation-for="Email" class="text-danger small"></span></div>
+        <div class="col-md-6"><label asp-for="Phone" class="form-label"></label><input asp-for="Phone" class="form-control" /><span asp-validation-for="Phone" class="text-danger small"></span></div>
+        <div class="col-md-6"><label asp-for="Role" class="form-label"></label><select asp-for="Role" class="form-select"><option value="Funcionario">Funcionário</option><option value="Administrador">Administrador</option></select><span asp-validation-for="Role" class="text-danger small"></span></div>
+        <div class="col-md-6"><label asp-for="Password" class="form-label"></label><input asp-for="Password" class="form-control" /><span asp-validation-for="Password" class="text-danger small"></span></div>
+        <div class="col-md-6"><label asp-for="ConfirmPassword" class="form-label"></label><input asp-for="ConfirmPassword" class="form-control" /><span asp-validation-for="ConfirmPassword" class="text-danger small"></span></div>
+    </div>
+    <div class="alert alert-info small mt-3">A senha deve ter pelo menos 10 caracteres, com letras maiúsculas, minúsculas e números.</div>
+    <button class="btn btn-primary" type="submit">Salvar funcionário</button>
+    <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancelar</a>
+</form>
+</div>

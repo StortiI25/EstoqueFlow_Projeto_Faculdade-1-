@@ -1,0 +1,7 @@
+flowchart TB
+    W[Usuário no navegador] --> MVC[ASP.NET Core MVC]
+    M[Aplicativo .NET MAUI] -->|HTTP / JSON| API[API REST ASP.NET Core]
+    MVC --> S[Serviços / Regras de negócio]
+    API --> S
+    S --> EF[Entity Framework Core]
+    EF --> DB[(SQLite no servidor)]

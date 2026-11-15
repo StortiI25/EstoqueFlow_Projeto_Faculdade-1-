@@ -1,0 +1,19 @@
+erDiagram
+    PRODUCT ||--o{ STOCK_MOVEMENT : possui
+    PRODUCT {
+        int Id PK
+        string Name
+        string Category
+        decimal Price
+        int Quantity
+        int MinimumStock
+        datetime CreatedAt
+    }
+    STOCK_MOVEMENT {
+        int Id PK
+        int ProductId FK
+        string Type
+        int Quantity
+        string Notes
+        datetime CreatedAt
+    }

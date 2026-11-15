@@ -1,0 +1,8 @@
+@model IEnumerable<EstoqueFlow.Web.Models.Customer>
+@{ ViewData["Title"] = "Clientes"; }
+<div class="page-intro"><div><h1>Cadastro de clientes</h1><p>Consulte e mantenha os dados de clientes da empresa.</p></div><a class="btn btn-primary btn-sm px-3 py-2" asp-action="Create"><i class="bi bi-plus-lg me-1"></i>Novo cliente</a></div>
+@if (TempData["Success"] is string ok) { <div class="alert alert-success">@ok</div> }
+<div class="panel-card"><div class="panel-title"><h2>Relação de clientes</h2><small>@Model.Count() registro(s)</small></div><div class="table-responsive"><table class="table table-hover"><thead><tr><th>Nome</th><th>Documento</th><th>E-mail</th><th>Telefone</th><th>Endereço</th><th></th></tr></thead><tbody>
+@foreach(var x in Model){<tr><td><strong>@x.Name</strong></td><td>@(x.Document == "" ? "—" : x.Document)</td><td>@(x.Email == "" ? "—" : x.Email)</td><td>@(x.Phone == "" ? "—" : x.Phone)</td><td>@(x.Address == "" ? "—" : x.Address)</td><td><a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@x.Id"><i class="bi bi-pencil"></i> Editar</a></td></tr>}
+@if(!Model.Any()){<tr><td colspan="6" class="text-center text-secondary py-5">Nenhum cliente cadastrado.</td></tr>}
+</tbody></table></div></div>

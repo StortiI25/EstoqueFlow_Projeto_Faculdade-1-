@@ -1,0 +1,19 @@
+@model EstoqueFlow.Web.Models.ViewModels.EmployeeEditViewModel
+@{ ViewData["Title"] = "Editar funcionário"; }
+<div class="page-intro"><div><h1>Editar funcionário</h1><p>Atualize os dados e permissões desta conta.</p></div></div>
+<div class="panel-card" style="max-width:760px">
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    <input asp-for="Id" type="hidden" />
+    <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+    <div class="row g-3">
+        <div class="col-md-6"><label asp-for="FullName" class="form-label"></label><input asp-for="FullName" class="form-control" /><span asp-validation-for="FullName" class="text-danger small"></span></div>
+        <div class="col-md-6"><label asp-for="Email" class="form-label"></label><input asp-for="Email" class="form-control" /><span asp-validation-for="Email" class="text-danger small"></span></div>
+        <div class="col-md-6"><label asp-for="Phone" class="form-label"></label><input asp-for="Phone" class="form-control" /><span asp-validation-for="Phone" class="text-danger small"></span></div>
+        <div class="col-md-6"><label asp-for="Role" class="form-label"></label><select asp-for="Role" class="form-select"><option value="Funcionario">Funcionário</option><option value="Administrador">Administrador</option></select><span asp-validation-for="Role" class="text-danger small"></span></div>
+        <div class="col-12"><div class="form-check"><input asp-for="IsActive" class="form-check-input" /><label asp-for="IsActive" class="form-check-label"></label></div></div>
+    </div>
+    <div class="alert alert-warning small mt-3">Um administrador não pode remover o próprio acesso nem desativar o último administrador ativo.</div>
+    <button class="btn btn-primary" type="submit">Salvar alterações</button>
+    <a asp-action="Index" class="btn btn-outline-secondary ms-2">Cancelar</a>
+</form>
+</div>

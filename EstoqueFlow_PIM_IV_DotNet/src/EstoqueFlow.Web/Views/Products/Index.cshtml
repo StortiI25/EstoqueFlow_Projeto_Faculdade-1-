@@ -1,0 +1,36 @@
+@model IEnumerable<EstoqueFlow.Web.Models.Product>
+@{ ViewData["Title"] = "Produtos"; }
+<div class="page-intro">
+    <div><h1>Cadastro de produtos</h1><p>Consulte e mantenha os itens registrados no estoque.</p></div>
+    <a class="btn btn-primary btn-sm px-3 py-2" asp-action="Create"><i class="bi bi-plus-lg me-1"></i>Novo produto</a>
+</div>
+<div class="panel-card">
+    <div class="panel-title">
+        <h2>Relação de produtos</h2>
+        <small>@Model.Count() registro(s)</small>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead><tr><th>Código</th><th>Descrição</th><th>Categoria</th><th>Preço</th><th>Saldo</th><th>Estoque mínimo</th><th>Situação</th><th>Ação</th></tr></thead>
+            <tbody>
+            @foreach (var p in Model)
+            {
+                <tr>
+                    <td class="text-secondary">#@p.Id</td>
+                    <td><strong>@p.Name</strong></td>
+                    <td>@(string.IsNullOrWhiteSpace(p.Category) ? "—" : p.Category)</td>
+                    <td>@p.Price.ToString("C")</td>
+                    <td><strong>@p.Quantity</strong></td>
+                    <td>@p.MinimumStock</td>
+                    <td>@if (p.IsLowStock) { <span class="status-low">Estoque baixo</span> } else { <span class="status-ok">Normal</span> }</td>
+                    <td><a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@p.Id"><i class="bi bi-pencil"></i> Editar</a></td>
+                </tr>
+            }
+            @if (!Model.Any())
+            {
+                <tr><td colspan="8" class="text-center text-secondary py-5"><i class="bi bi-inbox fs-3 d-block mb-2"></i>Nenhum produto cadastrado. Utilize “Novo produto” para começar.</td></tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

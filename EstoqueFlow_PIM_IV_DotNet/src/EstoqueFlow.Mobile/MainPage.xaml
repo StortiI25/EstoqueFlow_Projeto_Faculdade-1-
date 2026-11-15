@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EstoqueFlow.Mobile.MainPage"
+             Title="EstoqueFlow"
+             BackgroundColor="#F4F7FB">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid Grid.Row="0" BackgroundColor="#17365D" Padding="20,16" ColumnDefinitions="*,Auto">
+            <VerticalStackLayout Spacing="2">
+                <Label Text="EstoqueFlow" FontSize="23" FontAttributes="Bold" TextColor="White" />
+                <Label x:Name="HeaderSubtitle" Text="Gestão inteligente de estoque" FontSize="12" TextColor="#D8E5F5" />
+            </VerticalStackLayout>
+            <Button Grid.Column="1" Text="Sair" Clicked="OnLogoutClicked" IsVisible="False" x:Name="HeaderLogout"
+                    BackgroundColor="#294D75" TextColor="White" CornerRadius="10" Padding="14,7" />
+        </Grid>
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="18" Spacing="16">
+                <VerticalStackLayout x:Name="LoginPanel" Spacing="12" IsVisible="True">
+                    <Label Text="Acesse sua conta" FontSize="26" FontAttributes="Bold" TextColor="#17365D" />
+                    <Label Text="Entre para acompanhar os dados da sua empresa." TextColor="#667085" />
+                    <Frame BackgroundColor="White" BorderColor="#E2E8F0" CornerRadius="16" Padding="16" HasShadow="False">
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="E-mail" FontAttributes="Bold" TextColor="#344054" />
+                            <Entry x:Name="EmailEntry" Placeholder="seu@email.com" Keyboard="Email" BackgroundColor="#F8FAFC" />
+                            <Label Text="Senha" FontAttributes="Bold" TextColor="#344054" />
+                            <Entry x:Name="PasswordEntry" Placeholder="Sua senha" IsPassword="True" BackgroundColor="#F8FAFC" />
+                            <Button Text="Entrar" Clicked="OnLoginClicked" BackgroundColor="#17365D" TextColor="White" CornerRadius="12" HeightRequest="48" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout x:Name="AppPanel" IsVisible="False" Spacing="18">
+                    <Border BackgroundColor="#17365D" StrokeThickness="0" StrokeShape="RoundRectangle 20" Padding="18">
+                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" ColumnSpacing="10">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="PAINEL DE CONTROLE" FontSize="10" FontAttributes="Bold" TextColor="#BFD2EA" />
+                                <Label x:Name="WelcomeLabel" Text="Bem-vindo(a)!" FontSize="24" FontAttributes="Bold" TextColor="White" />
+                                <Label Text="Acompanhe sua operação em tempo real" FontSize="12" TextColor="#D8E5F5" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1" Text="↻" Clicked="OnRefreshDashboardClicked" BackgroundColor="#294D75" TextColor="White" CornerRadius="14" WidthRequest="46" HeightRequest="46" Padding="0" FontSize="22" VerticalOptions="Start" />
+                            <HorizontalStackLayout Grid.Row="1" Spacing="6" Margin="0,12,0,0">
+                                <BoxView WidthRequest="7" HeightRequest="7" CornerRadius="4" Color="#55D6A2" VerticalOptions="Center" />
+                                <Label Text="Dados sincronizados com o servidor" FontSize="11" TextColor="#D8E5F5" />
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </Border>
+                    <Label Text="Resumo do estoque" FontSize="18" FontAttributes="Bold" TextColor="#17365D" />
+
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                        <Frame Grid.Row="0" Grid.Column="0" BackgroundColor="White" BorderColor="#E2E8F0" CornerRadius="16" Padding="15" HasShadow="False">
+                            <VerticalStackLayout Spacing="4"><Label Text="PRODUTOS" FontSize="10" FontAttributes="Bold" TextColor="#667085"/><Label x:Name="KpiProducts" Text="—" FontSize="25" FontAttributes="Bold" TextColor="#17365D"/><Label Text="cadastrados" FontSize="11" TextColor="#667085"/></VerticalStackLayout>
+                        </Frame>
+                        <Frame Grid.Row="0" Grid.Column="1" BackgroundColor="#FFF7ED" BorderColor="#FED7AA" CornerRadius="16" Padding="15" HasShadow="False">
+                            <VerticalStackLayout Spacing="4"><Label Text="ESTOQUE BAIXO" FontSize="10" FontAttributes="Bold" TextColor="#667085"/><Label x:Name="KpiLowStock" Text="—" FontSize="25" FontAttributes="Bold" TextColor="#C2410C"/><Label Text="itens para revisar" FontSize="11" TextColor="#667085"/></VerticalStackLayout>
+                        </Frame>
+                        <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="White" BorderColor="#E2E8F0" CornerRadius="16" Padding="15" HasShadow="False">
+                            <VerticalStackLayout Spacing="4"><Label Text="UNIDADES" FontSize="10" FontAttributes="Bold" TextColor="#667085"/><Label x:Name="KpiUnits" Text="—" FontSize="25" FontAttributes="Bold" TextColor="#17365D"/><Label Text="em estoque" FontSize="11" TextColor="#667085"/></VerticalStackLayout>
+                        </Frame>
+                        <Frame Grid.Row="1" Grid.Column="1" BackgroundColor="White" BorderColor="#E2E8F0" CornerRadius="16" Padding="15" HasShadow="False">
+                            <VerticalStackLayout Spacing="4"><Label Text="PEDIDOS PENDENTES" FontSize="10" FontAttributes="Bold" TextColor="#667085"/><Label x:Name="KpiOrders" Text="—" FontSize="25" FontAttributes="Bold" TextColor="#17365D"/><Label Text="compras e vendas" FontSize="11" TextColor="#667085"/></VerticalStackLayout>
+                        </Frame>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+                        <Label Text="Acessos rápidos" FontSize="18" FontAttributes="Bold" TextColor="#17365D" VerticalOptions="Center" />
+                        <Label Grid.Column="1" Text="ATALHOS" FontSize="10" FontAttributes="Bold" TextColor="#98A2B3" VerticalOptions="Center" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                        <Button Grid.Row="0" Grid.Column="0" Text="▦  Produtos" FontSize="16" Clicked="OnProductsNav" BackgroundColor="#17365D" TextColor="White" CornerRadius="12" HeightRequest="62" />
+                        <Button Grid.Row="0" Grid.Column="1" Text="⇄  Estoque" FontSize="16" Clicked="OnMovementsNav" BackgroundColor="#FFFFFF" TextColor="#17365D" BorderColor="#D7E0EB" CornerRadius="12" HeightRequest="62" />
+                        <Button Grid.Row="1" Grid.Column="0" Text="🛒  Compras" FontSize="16" Clicked="OnPurchasesNav" BackgroundColor="#FFFFFF" TextColor="#17365D" BorderColor="#D7E0EB" CornerRadius="12" HeightRequest="62" />
+                        <Button Grid.Row="1" Grid.Column="1" Text="🧾  Vendas" FontSize="16" Clicked="OnSalesNav" BackgroundColor="#FFFFFF" TextColor="#17365D" BorderColor="#D7E0EB" CornerRadius="12" HeightRequest="62" />
+                        <Button Grid.Row="2" Grid.Column="0" Text="♧  Fornecedores" FontSize="16" Clicked="OnSuppliersNav" BackgroundColor="#FFFFFF" TextColor="#17365D" BorderColor="#D7E0EB" CornerRadius="12" HeightRequest="62" />
+                        <Button Grid.Row="2" Grid.Column="1" Text="♙  Clientes" FontSize="16" Clicked="OnCustomersNav" BackgroundColor="#FFFFFF" TextColor="#17365D" BorderColor="#D7E0EB" CornerRadius="12" HeightRequest="62" />
+                    </Grid>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Text="Relatórios" Clicked="OnReportsNav" BackgroundColor="#E8EEF6" TextColor="#17365D" CornerRadius="10" />
+                        <Button Grid.Column="1" Text="Mais opções" Clicked="OnMoreNav" BackgroundColor="#E8EEF6" TextColor="#17365D" CornerRadius="10" />
+                    </Grid>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout x:Name="ModulePanel" IsVisible="False" Spacing="12">
+                    <Button Text="‹  Voltar ao início" Clicked="OnHomeNav" HorizontalOptions="Start" BackgroundColor="Transparent" TextColor="#17365D" Padding="0" />
+                    <Label x:Name="ModuleTitle" Text="Produtos" FontSize="24" FontAttributes="Bold" TextColor="#17365D" />
+                    <Label x:Name="ModuleDescription" Text="Dados sincronizados com o sistema Web." TextColor="#667085" />
+                    <SearchBar x:Name="ModuleSearch" Placeholder="Pesquisar neste módulo" PlaceholderColor="#98A2B3"
+                               TextChanged="OnModuleSearchTextChanged" BackgroundColor="White" />
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                        <Label x:Name="ModuleCount" Text="Registros" VerticalOptions="Center" FontSize="12" TextColor="#667085" />
+                        <Button Grid.Column="1" Text="↻ Atualizar" Clicked="OnRefreshModuleClicked"
+                                BackgroundColor="#E8EEF6" TextColor="#17365D" CornerRadius="18" Padding="16,8" />
+                    </Grid>
+                    <Grid x:Name="ProductActions" ColumnDefinitions="*,*" ColumnSpacing="8" IsVisible="False">
+                        <Button Text="＋ Novo produto" Clicked="OnCreateProductClicked" BackgroundColor="#17365D" TextColor="White" CornerRadius="12" HeightRequest="46" />
+                        <Button Grid.Column="1" Text="⇄ Movimentar" Clicked="OnRegisterMovementClicked" BackgroundColor="#E8EEF6" TextColor="#17365D" CornerRadius="12" HeightRequest="46" />
+                    </Grid>
+                    <Button x:Name="MovementAction" Text="＋ Registrar movimentação" Clicked="OnRegisterMovementClicked"
+                            IsVisible="False" BackgroundColor="#17365D" TextColor="White" CornerRadius="12" HeightRequest="46" />
+                    <Grid x:Name="ContactActions" ColumnDefinitions="*" IsVisible="False">
+                        <Button x:Name="CreateContactButton" Text="＋ Novo cadastro" Clicked="OnCreateContactClicked"
+                                BackgroundColor="#17365D" TextColor="White" CornerRadius="12" HeightRequest="48" />
+                    </Grid>
+                    <Grid x:Name="OrderActions" ColumnDefinitions="*" IsVisible="False">
+                        <Button x:Name="CreateOrderButton" Text="＋ Novo pedido" Clicked="OnCreateOrderClicked"
+                                BackgroundColor="#17365D" TextColor="White" CornerRadius="12" HeightRequest="48" />
+                    </Grid>
+                    <Label x:Name="EmptyState" Text="Nenhum registro encontrado." IsVisible="False"
+                           HorizontalTextAlignment="Center" TextColor="#667085" Padding="20" />
+                    <CollectionView x:Name="ModuleList" SelectionMode="Single" SelectionChanged="OnModuleSelectionChanged" HeightRequest="480">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border Stroke="#E2E8F0" StrokeThickness="1" BackgroundColor="White" StrokeShape="RoundRectangle 14" Padding="14" Margin="0,4">
+                                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                        <Border WidthRequest="48" HeightRequest="48" BackgroundColor="#EAF0F8" StrokeThickness="0" StrokeShape="RoundRectangle 14" VerticalOptions="Start">
+                                            <Label Text="{Binding Icon}" FontSize="23" TextColor="#17365D" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                                        </Border>
+                                        <VerticalStackLayout Grid.Column="1" Spacing="5" VerticalOptions="Center">
+                                            <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="15" TextColor="#17365D" />
+                                            <Label Text="{Binding Subtitle}" FontSize="12" TextColor="#667085" LineBreakMode="WordWrap" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+
+                <ActivityIndicator x:Name="Loading" IsRunning="False" IsVisible="False" Color="#17365D" />
+                <Label x:Name="StatusLabel" Text="Verificando conexão..." FontSize="11" TextColor="#667085" Padding="2,4" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid Grid.Row="2" x:Name="BottomNav" IsVisible="False"
+              BackgroundColor="White" Padding="8,5,8,7"
+              ColumnDefinitions="*,*,*,*,*" RowDefinitions="Auto,*"
+              HeightRequest="82">
+            <BoxView Grid.Row="0" Grid.ColumnSpan="5" HeightRequest="1" Color="#E5EAF1" />
+
+            <Grid Grid.Row="1" Grid.Column="0" RowDefinitions="Auto,Auto" VerticalOptions="Center">
+                <Label Text="⌂" FontSize="27" TextColor="#17365D" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Grid.Row="1" Text="Início" FontSize="12" FontAttributes="Bold" TextColor="#17365D" HorizontalTextAlignment="Center" />
+                <Button Grid.RowSpan="2" Text="" Clicked="OnHomeNav" BackgroundColor="Transparent" BorderWidth="0" Padding="0" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1" RowDefinitions="Auto,Auto" VerticalOptions="Center">
+                <Label Text="▦" FontSize="25" TextColor="#17365D" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Grid.Row="1" Text="Produtos" FontSize="12" TextColor="#17365D" HorizontalTextAlignment="Center" />
+                <Button Grid.RowSpan="2" Text="" Clicked="OnProductsNav" BackgroundColor="Transparent" BorderWidth="0" Padding="0" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="2" RowDefinitions="Auto,Auto" VerticalOptions="Center">
+                <Label Text="⇄" FontSize="26" TextColor="#17365D" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Grid.Row="1" Text="Estoque" FontSize="12" TextColor="#17365D" HorizontalTextAlignment="Center" />
+                <Button Grid.RowSpan="2" Text="" Clicked="OnMovementsNav" BackgroundColor="Transparent" BorderWidth="0" Padding="0" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="3" RowDefinitions="Auto,Auto" VerticalOptions="Center">
+                <Label Text="▤" FontSize="25" TextColor="#17365D" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Grid.Row="1" Text="Vendas" FontSize="12" TextColor="#17365D" HorizontalTextAlignment="Center" />
+                <Button Grid.RowSpan="2" Text="" Clicked="OnSalesNav" BackgroundColor="Transparent" BorderWidth="0" Padding="0" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="4" RowDefinitions="Auto,Auto" VerticalOptions="Center">
+                <Label Text="•••" FontSize="23" TextColor="#17365D" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" />
+                <Label Grid.Row="1" Text="Mais" FontSize="12" TextColor="#17365D" HorizontalTextAlignment="Center" />
+                <Button Grid.RowSpan="2" Text="" Clicked="OnMoreNav" BackgroundColor="Transparent" BorderWidth="0" Padding="0" />
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>
